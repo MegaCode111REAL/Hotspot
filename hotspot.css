@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap');
+
+:root {
+  --bg: #0b0e14;
+  --hotspot-teal-a: rgba(126, 224, 216, 0.8);
+  --hotspot-teal-b: rgba(22, 163, 148, 0.8);
+  --hotspot-orange-a: rgba(255, 216, 138, 0.8);
+  --hotspot-orange-b: rgba(244, 165, 62, 0.8);
+  --pulse-color: rgba(126, 224, 216, 0.45);
+  --pulse-color-selected: rgba(255, 200, 120, 0.5);
+  --popup-bg: rgba(20, 24, 32, 0.72);
+  --popup-border: rgba(255,255,255,0.08);
+  --popup-shadow: rgba(0,0,0,0.45);
+  --popup-heading: #f2f6f5;
+  --popup-body: #c4ccd4;
+  --close-color: #8a939c;
+  --close-hover-bg: rgba(255,255,255,0.08);
+  --close-hover-color: #f2f6f5;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #eef1f0;
+    --pulse-color: rgba(22, 163, 148, 0.35);
+    --pulse-color-selected: rgba(217, 128, 22, 0.4);
+    --popup-bg: rgba(255, 255, 255, 0.72);
+    --popup-border: rgba(0,0,0,0.08);
+    --popup-shadow: rgba(0,0,0,0.18);
+    --popup-heading: #1a1f24;
+    --popup-body: #454e56;
+    --close-color: #8a939c;
+    --close-hover-bg: rgba(0,0,0,0.06);
+    --close-hover-color: #1a1f24;
+  }
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* no scrolling */
+  background: var(--bg);
+  font-family: 'Inter', Arial, sans-serif;
+}
+
+/* Background image container — image always fits the screen */
+.diagram {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('YOUR-IMAGE.jpg'); /* <-- put your image path/URL here */
+  background-size: contain;   /* keeps whole image visible, no cropping */
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* One hotspot = one clickable button at a fixed pixel location */
+.hotspot {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  background: radial-gradient(circle at 35% 30%, var(--hotspot-teal-a), var(--hotspot-teal-b) 70%);
+  backdrop-filter: blur(2px);
+  border: 2px solid rgba(255,255,255,0.9);
+  border-radius: 50%;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+  transition: transform 0.25s cubic-bezier(.34,1.56,.64,1), box-shadow 0.25s ease;
+}
+
+/* pulse ring — thicker and more subtle, collapses from the button's edge to the center */
+.hotspot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 4px solid var(--pulse-color);
+  animation: pulse-in 2.4s ease-in infinite;
+  pointer-events: none;
+}
+
+@keyframes pulse-in {
+  0%   { transform: scale(1);   opacity: 0.6; }
+  80%  { opacity: 0.08; }
+  100% { transform: scale(0);   opacity: 0; }
+}
+
+.hotspot:hover {
+  transform: translate(-50%, -50%) scale(1.15);
+  box-shadow: 0 4px 14px rgba(22, 163, 148, 0.55);
+}
+
+/* selected state: orange glow, pulse now expands outward from the edge */
+.hotspot.open {
+  background: radial-gradient(circle at 35% 30%, var(--hotspot-orange-a), var(--hotspot-orange-b) 70%);
+  box-shadow: 0 4px 16px rgba(244, 165, 62, 0.65), 0 0 0 4px rgba(244, 165, 62, 0.18);
+}
+
+.hotspot.open::after {
+  border-color: var(--pulse-color-selected);
+  animation-name: pulse-out;
+  animation-duration: 1.4s;
+}
+
+@keyframes pulse-out {
+  0%   { transform: scale(1);   opacity: 0.6; }
+  80%  { opacity: 0.08; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+
+/* Popup card — top-left corner aligned to the hotspot's position */
+.popup {
+  position: absolute;
+  display: block;
+  width: 250px;
+  background: var(--popup-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--popup-border);
+  border-radius: 14px;
+  padding: 16px 18px;
+  box-shadow: 0 12px 30px var(--popup-shadow);
+  z-index: 10;
+  transform: scale(0.92);
+  transform-origin: top left;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.28s cubic-bezier(.34,1.56,.64,1), opacity 0.2s ease;
+}
+.popup.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+.popup h3 {
+  margin: 0 0 6px 0;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.2px;
+  color: var(--popup-heading);
+}
+.popup p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--popup-body);
+}
+.popup .close-btn {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
+  color: var(--close-color);
+  border-radius: 50%;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.popup .close-btn:hover {
+  background: var(--close-hover-bg);
+  color: var(--close-hover-color);
+}
