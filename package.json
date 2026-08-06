@@ -28,11 +28,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/YOUR-USERNAME/hotspot.git"
+    "url": "https://github.com/MegaCode111REAL/hotspot.git"
   },
-  "homepage": "https://github.com/YOUR-USERNAME/hotspot#readme",
+  "homepage": "https://github.com/MegaCode111REAL/hotspot#readme",
   "bugs": {
-    "url": "https://github.com/YOUR-USERNAME/hotspot/issues"
+    "url": "https://github.com/MegaCode111REAL/hotspot/issues"
   },
   "sideEffects": false,
   "engines": {
