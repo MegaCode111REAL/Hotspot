@@ -1,7 +1,7 @@
 /*!
  * Hotspot v1.0.0
  * Turn any image into an interactive, clickable diagram.
- * Apache License (v2)
+ * Apache 2.0 License
  * https://github.com/MegaCode111REAL/hotspot
  */
 (function (root, factory) {
