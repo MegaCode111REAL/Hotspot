@@ -32,7 +32,7 @@ const esmHeader =
 `/*!
  * Hotspot v1.0.0 — ES module build
  * Auto-generated from hotspot.js by build.js — do not edit directly.
- * MIT License
+ * Apache 2.0 License
  */
 `;
 
