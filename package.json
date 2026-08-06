@@ -1,0 +1,41 @@
+{
+  "name": "hotspot-diagram",
+  "version": "1.0.0",
+  "description": "Turn any image into an interactive, clickable diagram — plain HTML, CSS, and JS, no dependencies.",
+  "main": "hotspot.js",
+  "module": "hotspot.js",
+  "unpkg": "hotspot.min.js",
+  "jsdelivr": "hotspot.min.js",
+  "style": "hotspot.css",
+  "files": [
+    "hotspot.js",
+    "hotspot.min.js",
+    "hotspot.css",
+    "hotspot.min.css",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "diagram",
+    "interactive",
+    "hotspot",
+    "infographic",
+    "annotation",
+    "image-map",
+    "svg",
+    "education"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR-USERNAME/hotspot.git"
+  },
+  "homepage": "https://github.com/YOUR-USERNAME/hotspot#readme",
+  "bugs": {
+    "url": "https://github.com/YOUR-USERNAME/hotspot/issues"
+  },
+  "sideEffects": false,
+  "engines": {
+    "node": ">=0"
+  }
+}
